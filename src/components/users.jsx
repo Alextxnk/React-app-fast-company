@@ -6,14 +6,13 @@ const Users = () => {
    const [users, setUsers] = useState(api.users.fetchAll());
    const handleDelete = userId => {
       setUsers(users.filter((user) => user._id !== userId));
-
-      const renderPhrase = (number) => {
-         if (number > 4 && number < 15) {
-            return 'человек тусанет';
-         }
-
+   };
+   const renderPhrase = (number) => {
+      if (number > 4 && number < 15) {
          return 'человек тусанет';
-      };
+      }
+
+      return 'человек тусанет';
    };
 
    return (
