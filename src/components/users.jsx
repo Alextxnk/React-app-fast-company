@@ -20,14 +20,20 @@ const Users = () => {
          return 'человека тусанут';
       }
 
+      if (lastOne === 1) {
+         return 'человек тусанет';
+      }
+
       return 'человек тусанет';
    };
 
    return (
       <>
-         <span className={'badge bg-' + (users.length > 0 ? 'primary' : 'danger')}>
-            {users.length > 0 ? `${users.length} ${renderPhrase(users.length)} с тобой сегодня` : 'Никто с тобой не тусанет'}
-         </span>
+         <h2>
+            <span className={'badge m-2 bg-' + (users.length > 0 ? 'primary' : 'danger')}>
+               {users.length > 0 ? `${users.length} ${renderPhrase(users.length)} с тобой сегодня` : 'Никто с тобой не тусанет'}
+            </span>
+         </h2>
          {users.length > 0 &&
             <table className='table'>
                <thead>
