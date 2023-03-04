@@ -19,7 +19,7 @@ function App() {
             return user;
          })
       );
-      console.log(id);
+      // console.log(id);
    };
 
    return (

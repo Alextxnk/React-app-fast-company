@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { paginate } from '../utils/paginate';
 import Pagination from './pagination';
 import User from './user';
 
@@ -10,6 +11,8 @@ const UsersList = ({ users, ...rest }) => {
    const handlePageChange = (pageIndex) => {
       setCurrenPage(pageIndex);
    };
+
+   const userCrop = paginate(users, currentPage, pageSize);
 
    return (
       <>
@@ -27,7 +30,7 @@ const UsersList = ({ users, ...rest }) => {
                </tr>
             </thead>
             <tbody>
-               {users.map((user) => (
+               {userCrop.map((user) => (
                   <User key={user._id} {...rest} {...user} />
                ))}
             </tbody>
