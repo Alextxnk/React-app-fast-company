@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { paginate } from '../utils/paginate';
 import Pagination from './pagination';
 import User from './user';
@@ -6,27 +6,51 @@ import PropTypes from 'prop-types';
 import GroupList from './groupList';
 import api from '../api';
 
-const UsersList = ({ users, ...rest }) => {
+const UsersList = ({ users: allUsers, ...rest }) => {
    const [currentPage, setCurrenPage] = useState(1);
    const [professions, setProfession] = useState(api.professions.fetchAll());
-   const count = users.length;
+   const [selectedProf, setSelectedProf] = useState();
+   const count = allUsers.length;
    const pageSize = 4;
 
-   const handleProfessionSelect = (params) => {
-      setProfession();
-      console.log(params);
+   useEffect(() => {
+      // 1 способ
+      /* api.professions.fetchAll().then((data) => setProfession(
+         Object.assign(data, { allProfession: { name: 'Все профессии' } })
+      )); */
+
+      // 2 способ
+      api.professions.fetchAll().then((data) => setProfession(data));
+   }, []);
+
+   const handleProfessionSelect = (item) => {
+      setSelectedProf(item);
    };
-   console.log(professions);
 
    const handlePageChange = (pageIndex) => {
       setCurrenPage(pageIndex);
    };
 
-   const userCrop = paginate(users, currentPage, pageSize);
+   // 1 способ
+   // const filteredUsers = selectedProf && selectedProf._id ? allUsers.filter((user) => user.profession === selectedProf) : allUsers;
+
+   // 2 способ
+   const filteredUsers = selectedProf ? allUsers.filter((user) => user.profession === selectedProf) : allUsers;
+
+   const userCrop = paginate(filteredUsers, currentPage, pageSize);
+
+   const clearFilter = () => {
+      setSelectedProf();
+   };
 
    return (
       <>
-         <GroupList items={professions} onItemSelect={handleProfessionSelect} />
+         {professions && (
+            <>
+               <GroupList items={professions} selectedItem={selectedProf} onItemSelect={handleProfessionSelect} />
+               <button className='btn btn-outline-secondary m-2' onClick={clearFilter}>Очистить</button>
+            </>
+         )}
          {count > 0 && (
             <table className='table'>
                <thead>
