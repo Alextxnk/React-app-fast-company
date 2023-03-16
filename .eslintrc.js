@@ -19,6 +19,6 @@ module.exports = {
    rules: {
       indent: ['error', 3],
       semi: [2, 'always']
-      'space-before-function-paren': ['error', {anonymous: 'always', named: 'never'}]
+      /* 'space-before-function-paren': ['error', {anonymous: 'always', named: 'never'}] */
    }
 };
