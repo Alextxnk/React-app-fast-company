@@ -8,12 +8,34 @@ import api from '../api';
 import UsersTable from './usersTable';
 import _ from 'lodash';
 
-const UsersList = ({ users: allUsers, ...rest }) => {
+const UsersList = () => {
    const [currentPage, setCurrentPage] = useState(1);
    const [professions, setProfession] = useState(api.professions.fetchAll());
    const [selectedProf, setSelectedProf] = useState();
-   const [sortBy, setSortBy] = useState({ iter: 'name', order: 'asc' });
+   const [sortBy, setSortBy] = useState({ path: 'name', order: 'asc' });
    const pageSize = 8;
+
+   // работа с users
+   const [users, setUsers] = useState();
+
+   useEffect(() => {
+      api.users.fetchAll().then((data) => setUsers(data));
+   }, []);
+
+   const handleDelete = (userId) => {
+      setUsers(users.filter((user) => user._id !== userId));
+   };
+
+   const handleToggleBookMark = (id) => {
+      setUsers(
+         users.map((user) => {
+            if (user._id === id) {
+               return { ...user, bookmark: !user.bookmark };
+            }
+            return user;
+         })
+      );
+   };
 
    useEffect(() => {
       api.professions.fetchAll().then((data) => setProfession(data));
@@ -35,33 +57,43 @@ const UsersList = ({ users: allUsers, ...rest }) => {
       setSortBy(item);
    };
 
-   const filteredUsers = selectedProf ? allUsers.filter((user) => JSON.stringify(user.profession) === JSON.stringify(selectedProf)) : allUsers;
+   if (users) {
+      const filteredUsers = selectedProf ? users.filter((user) => JSON.stringify(user.profession) === JSON.stringify(selectedProf)) : users;
 
-   const count = filteredUsers.length;
-   const sortedUsers = _.orderBy(filteredUsers, [sortBy.iter], [sortBy.order]);
-   const userCrop = paginate(sortedUsers, currentPage, pageSize);
+      const count = filteredUsers.length;
+      const sortedUsers = _.orderBy(filteredUsers, [sortBy.path], [sortBy.order]);
+      const userCrop = paginate(sortedUsers, currentPage, pageSize);
 
-   const clearFilter = () => {
-      setSelectedProf();
-   };
+      const clearFilter = () => {
+         setSelectedProf();
+      };
 
-   return (
-      <div className='d-flex'>
-         {professions && (
-            <div className='d-flex flex-column flex-shrink-0 p-3'>
-               <GroupList items={professions} selectedItem={selectedProf} onItemSelect={handleProfessionSelect} />
-               <button className='btn btn-outline-secondary m-2' onClick={clearFilter}>Очистить</button>
-            </div>
-         )}
-         <div className='d-flex flex-column'>
-            <SearchStatus length={count} />
-            {count > 0 && (
-               <UsersTable users={userCrop} onSort={handleSort} currentSort={sortBy} {...rest} />
+      return (
+         <div className='d-flex'>
+            {professions && (
+               <div className='d-flex flex-column flex-shrink-0 p-3'>
+                  <GroupList items={professions} selectedItem={selectedProf} onItemSelect={handleProfessionSelect} />
+                  <button className='btn btn-outline-secondary m-2' onClick={clearFilter}>Очистить</button>
+               </div>
             )}
-            <div className='d-flex justify-content-center'>
-               <Pagination itemsCount={count} pageSize={pageSize} currentPage={currentPage} onPageChange={handlePageChange} />
+            <div className='d-flex flex-column'>
+               <SearchStatus length={count} />
+               {count > 0 && (
+                  <UsersTable users={userCrop} onSort={handleSort} selectedSort={sortBy} onDelete={handleDelete} onToggleBookMark={handleToggleBookMark} />
+               )}
+               <div className='d-flex justify-content-center'>
+                  <Pagination itemsCount={count} pageSize={pageSize} currentPage={currentPage} onPageChange={handlePageChange} />
+               </div>
             </div>
          </div>
+      );
+   }
+
+   return (
+      <div className='d-flex justify-content-center p-3'>
+         <h3>
+            Загрузка...
+         </h3>
       </div>
    );
 };
