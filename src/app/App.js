@@ -1,9 +1,23 @@
 import React from 'react';
-import UsersList from './components/usersList';
+import { Routes, Route } from 'react-router-dom';
+
+import Users from './layouts/users';
+import Login from './layouts/login';
+import Main from './layouts/main';
+import NavBar from './components/navBar';
+import NotFound from './layouts/notFound';
 
 function App () {
    return (
-      <UsersList />
+      <div>
+         <NavBar />
+         <Routes>
+            <Route path='/' element={<Main />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/users' element={<Users />} />
+            <Route path='*' element={<NotFound />} />
+         </Routes>
+      </div>
    );
 }
 
