@@ -14,7 +14,7 @@ function App () {
          <Routes>
             <Route path='/' element={<Main />} />
             <Route path='/login' element={<Login />} />
-            <Route path='/users' element={<Users />} />
+            <Route path='/users/:userId?' element={<Users />} />
             <Route path='*' element={<NotFound />} />
          </Routes>
       </div>
