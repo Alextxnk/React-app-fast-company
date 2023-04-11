@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import api from '../../../api';
-import QualitiesList from '../../ui/qualities/qualitiesList';
+import Qualities from '../../ui/qualities';
 import { useNavigate } from 'react-router-dom';
 
 const UserPage = ({ userId }) => {
@@ -21,7 +21,7 @@ const UserPage = ({ userId }) => {
          <div className='p-3'>
             <h1>{user.name}</h1>
             <h2>Профессия: {user.profession.name}</h2>
-            <QualitiesList qualities={user.qualities} />
+            <Qualities qualities={user.qualities} />
             <p>Встретился, раз: {user.completedMeetings}</p>
             <h2>Оценка: {user.rate}</h2>
             <button onClick={handleClick} className='btn btn-outline-primary'>
