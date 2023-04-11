@@ -46,6 +46,8 @@ const Login = () => {
       return Object.keys(errors).length === 0;
    };
 
+   const isValid = Object.keys(errors).length === 0;
+
    const handleSubmit = (e) => {
       e.preventDefault();
       const isValid = validate();
@@ -54,29 +56,38 @@ const Login = () => {
    };
 
    return (
-      <form onSubmit={handleSubmit}>
-         <div className='form-group row mx-5'>
-            <TextField
-               label='Электронная почта'
-               name='email'
-               value={data.email}
-               placeholder='email@example.com'
-               onChange={handleChange}
-               error={errors.email}
-            />
-            <TextField
-               label='Пароль'
-               type='password'
-               name='password'
-               value={data.password}
-               onChange={handleChange}
-               error={errors.password}
-            />
-            <button className='btn btn-outline-primary' type='submit'>
-               Отправить
-            </button>
+      <div className='container mt-5'>
+         <div className='row'>
+            <div className='col-md-6 offset-md-3 shadow p-4'>
+               <h3 className='mb-4'>Вход</h3>
+               <form onSubmit={handleSubmit}>
+                  <TextField
+                     label='Электронная почта'
+                     name='email'
+                     value={data.email}
+                     placeholder='email@example.com'
+                     onChange={handleChange}
+                     error={errors.email}
+                  />
+                  <TextField
+                     label='Пароль'
+                     type='password'
+                     name='password'
+                     value={data.password}
+                     onChange={handleChange}
+                     error={errors.password}
+                  />
+                  <button
+                     className='btn btn-primary w-100 mx-auto'
+                     type='submit'
+                     disabled={!isValid}
+                  >
+                     Войти
+                  </button>
+               </form>
+            </div>
          </div>
-      </form>
+      </div>
    );
 };
 
