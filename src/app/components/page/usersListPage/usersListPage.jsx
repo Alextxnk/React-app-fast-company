@@ -92,7 +92,7 @@ const UsersListPage = () => {
       };
 
       return (
-         <div className='d-flex'>
+         <div className='d-flex container'>
             {professions && (
                <div className='d-flex flex-column flex-shrink-0 p-3'>
                   <GroupList
