@@ -18,7 +18,8 @@ module.exports = {
    ],
    rules: {
       indent: ['error', 3],
-      semi: [2, 'always']
+      semi: [2, 'always'],
+      'multiline-ternary': ['off']
       /* 'space-before-function-paren': ['error', {anonymous: 'always', named: 'never'}] */
    }
 };
