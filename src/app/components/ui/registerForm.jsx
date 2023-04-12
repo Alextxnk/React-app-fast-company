@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import TextField from '../common/form/textField';
+import SelectField from '../common/form/selectField';
+import RadioField from '../common/form/radioField';
 import { validator } from '../../utils/validator';
 import api from '../../api';
-import SelectField from '../common/form/selectField';
 
 const RegisterForm = () => {
    const [data, setData] = useState({
       email: '',
       password: '',
-      profession: ''
+      profession: '',
+      gender: 'Мужчина'
    });
    const [errors, setErrors] = useState({});
    const [professions, setProfession] = useState();
@@ -97,6 +99,16 @@ const RegisterForm = () => {
             defaultOption='Выбрать'
             options={professions}
             error={errors.profession}
+         />
+         <RadioField
+            label='Пол'
+            name='gender'
+            options={[
+               { name: 'Мужчина', value: 'Мужчина' },
+               { name: 'Женщина', value: 'Женщина' }
+            ]}
+            onChange={handleChange}
+            value={data.gender}
          />
          <button
             className='btn btn-primary w-100 mx-auto'
