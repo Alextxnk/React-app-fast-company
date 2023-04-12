@@ -24,13 +24,13 @@ const Login = () => {
                   ? (
                      <>
                         <RegisterForm />
-                        <p>Уже есть аккаунт? <a role='button' onClick={toggleFormType}>Войти</a></p>
+                        <p>Уже есть аккаунт? <a role='button' className='text-primary text-decoration-none' onClick={toggleFormType}>Вход</a></p>
                      </>
                   )
                   : (
                      <>
                         <LoginForm />
-                        <p>Еще не зарегистрированы? <a role='button' onClick={toggleFormType}>Регистрация</a></p>
+                        <p>Еще не зарегистрированы? <a role='button' className='text-primary text-decoration-none' onClick={toggleFormType}>Регистрация</a></p>
                      </>
                   )}
             </div>
