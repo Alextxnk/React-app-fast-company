@@ -13,7 +13,7 @@ const TextField = ({
    const [showPassword, setShowPassword] = useState(false);
 
    const getInputClasses = () => {
-      return 'form-control' + (error ? ' is-invalid' : '');
+      return 'form-control' + (error ? ' is-invalid' : ' is-valid');
    };
 
    const toggleShowPassword = () => {
