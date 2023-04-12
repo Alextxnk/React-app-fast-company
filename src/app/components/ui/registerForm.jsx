@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import TextField from '../common/form/textField';
 import SelectField from '../common/form/selectField';
 import RadioField from '../common/form/radioField';
+import MultiSelectField from '../common/form/multiSelectField';
 import { validator } from '../../utils/validator';
 import api from '../../api';
 
@@ -10,20 +11,25 @@ const RegisterForm = () => {
       email: '',
       password: '',
       profession: '',
-      gender: 'Мужчина'
+      gender: 'Мужчина',
+      qualities: []
    });
    const [errors, setErrors] = useState({});
-   const [professions, setProfession] = useState();
+   const [professions, setProfession] = useState([]);
+   const [qualities, setQualities] = useState({});
 
    useEffect(() => {
       api.professions.fetchAll().then((data) => setProfession(data));
+      api.qualities.fetchAll().then((data) => setQualities(data));
    }, []);
 
    const handleChange = ({ target }) => {
-      setData((prevState) => ({
-         ...prevState,
-         [target.name]: target.value
-      }));
+      if (target) {
+         setData((prevState) => ({
+            ...prevState,
+            [target.name]: target.value
+         }));
+      }
    };
 
    const validatorConfig = {
@@ -110,6 +116,7 @@ const RegisterForm = () => {
             onChange={handleChange}
             value={data.gender}
          />
+         <MultiSelectField options={qualities} onChange={handleChange} />
          <button
             className='btn btn-primary w-100 mx-auto'
             type='submit'
