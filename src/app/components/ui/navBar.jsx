@@ -2,9 +2,22 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const NavBar = () => {
+   // const [showMobileMenu, setShowMobileMenu] = useState(false);
+
+   /* const items = [
+      {
+         title: 'Пользователи',
+         href: '/users'
+      },
+      {
+         title: 'Вход',
+         href: '/login'
+      }
+   ]; */
+
    return (
       <>
-         {/* <ul className='nav'>
+         <ul className='nav'>
             <li className='nav-item'>
                <Link className='nav-link' to='/' aria-current='page'>
                   Главная
@@ -20,9 +33,9 @@ const NavBar = () => {
                   Пользователи
                </Link>
             </li>
-         </ul> */}
+         </ul>
 
-         <nav className='navbar navbar-expand-md navbar-light bg-white mb-4 shadow-sm'>
+         {/* {<nav className='navbar navbar-expand-md navbar-light bg-white mb-4 shadow-sm'>
             <div className='container'>
                <Link className='navbar-brand ' to='/' aria-current='page'>
                   Fast company
@@ -31,9 +44,9 @@ const NavBar = () => {
                <div
                   className='collapse navbar-collapse'
                   id='navbarSupportedContent'
-               >
-                  {/* Left Side Of Navbar */}
-                  <ul className='navbar-nav mr-auto'>
+               > */}
+         {/* Left Side Of Navbar */}
+         {/* <ul className='navbar-nav mr-auto'>
                      <li className='nav-item'>
                         <Link
                            className='nav-link'
@@ -43,10 +56,10 @@ const NavBar = () => {
                            Пользователи
                         </Link>
                      </li>
-                  </ul>
+                  </ul> */}
 
-                  {/* Right Side Of Navbar */}
-                  <ul className='navbar-nav ml-auto'>
+         {/* Right Side Of Navbar */}
+         {/* <ul className='navbar-nav ml-auto'>
                      <li className='nav-item'>
                         <Link
                            className='nav-link'
@@ -59,7 +72,7 @@ const NavBar = () => {
                   </ul>
                </div>
             </div>
-         </nav>
+         </nav> */}
       </>
    );
 };
