@@ -2,7 +2,7 @@ import { professionsObject as professions } from './professions.api';
 const qualities = {
    tedious: {
       _id: '67rdca3eeb7f6fgeed471198',
-      name: 'Нудила',
+      name: 'Весельчак',
       color: 'primary'
    },
    strange: {
@@ -50,7 +50,7 @@ const users = [
       email: 'white4571@twipet.com',
       gender: 'male',
       profession: professions.doctor,
-      qualities: [qualities.buller, qualities.handsome, qualities.alcoholic],
+      qualities: [qualities.buller, qualities.handsome],
       completedMeetings: 15,
       rate: 2.5,
       bookmark: false
